@@ -1,0 +1,15 @@
+# .NET build output
+**/bin/
+**/obj/
+**/*.cache
+**/*AssemblyInfoInputs.cache
+
+# Node / Angular
+**/node_modules/
+**/dist/
+**/.angular/
+**/out-tsc/
+
+# IDE
+**/.vscode/
+**/.idea/
