@@ -320,3 +320,4 @@ C:\ShoesStore\ShoesStore\obj\Debug\net10.0\refint\ShoesStore.dll
 C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.pdb
 C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.genruntimeconfig.cache
 C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ref\ShoesStore.dll
+C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.sourcelink.json
