@@ -67,7 +67,11 @@
 .id-cell { color: #aaa; font-size: 13px; width: 60px; }
 .name-cell { font-weight: 500; color: #111; }
 .price-cell { font-weight: 600; color: #111; }
-.actions-cell { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; min-width: 250px; }
+.actions-cell { 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .btn {
   display: inline-flex;

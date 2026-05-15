@@ -14,6 +14,11 @@ namespace ShoesStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Fix decimal precision warnings
+            modelBuilder.Entity<Shoe>().Property(s => s.Price).HasPrecision(18, 2);
+            modelBuilder.Entity<Order>().Property(o => o.TotalAmount).HasPrecision(18, 2);
+            modelBuilder.Entity<OrderItem>().Property(oi => oi.UnitPrice).HasPrecision(18, 2);
+
             // Seed shoe data
             modelBuilder.Entity<Shoe>().HasData(
                 new Shoe { Id = 1, Name = "Air Runner", Brand = "Nike", Price = 1299.99m, StockQuantity = 5, Category = "Men", Description = "Lightweight running shoe", ImageUrl = "", IsBestSeller = true },

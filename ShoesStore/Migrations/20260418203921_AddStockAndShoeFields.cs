@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -38,26 +38,19 @@ namespace ShoesStore.Migrations
                 nullable: false,
                 defaultValue: false);
 
-            migrationBuilder.AddColumn<int>(
-                name: "StockQuantity",
-                table: "Shoes",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.UpdateData(
                 table: "Shoes",
                 keyColumn: "Id",
                 keyValue: 1,
-                columns: new[] { "Category", "Description", "ImageUrl", "IsBestSeller", "StockQuantity" },
-                values: new object[] { "", "", "", false, 0 });
+                columns: new[] { "Category", "Description", "ImageUrl", "IsBestSeller" },
+                values: new object[] { "", "", "", false });
 
             migrationBuilder.UpdateData(
                 table: "Shoes",
                 keyColumn: "Id",
                 keyValue: 2,
-                columns: new[] { "Category", "Description", "ImageUrl", "IsBestSeller", "StockQuantity" },
-                values: new object[] { "", "", "", false, 0 });
+                columns: new[] { "Category", "Description", "ImageUrl", "IsBestSeller" },
+                values: new object[] { "", "", "", false });
         }
 
         /// <inheritdoc />
