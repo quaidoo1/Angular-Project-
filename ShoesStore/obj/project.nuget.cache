@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cEyyGHN6WOs=",
+  "dgSpecHash": "UApi+lrxttI=",
   "success": true,
-  "projectFilePath": "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
+  "projectFilePath": "C:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KwameProject\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\KwameProject\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -61,15 +61,5 @@
     "C:\\Users\\KwameProject\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\KwameProject\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Problem reading the cache file c:\\ShoesStore\\ShoesStore\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
-      "warningLevel": 1,
-      "filePath": "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

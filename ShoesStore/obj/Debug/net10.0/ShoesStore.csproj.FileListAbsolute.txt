@@ -322,7 +322,6 @@ C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.pdb
 C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.genruntimeconfig.cache
 C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ref\ShoesStore.dll
 <<<<<<< HEAD
-C:\ShoesStore\ShoesStore\obj\Debug\net10.0\ShoesStore.sourcelink.json
 C:\ShoesStore\ShoesStore\bin\Debug\net10.0\BCrypt.Net-Next.dll
 C:\ShoesStore\ShoesStore\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 =======
