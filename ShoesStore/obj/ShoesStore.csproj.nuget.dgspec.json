@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ShoesStore\\ShoesStore\\ShoesStore.csproj": {}
+    "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj": {}
   },
   "projects": {
-    "C:\\ShoesStore\\ShoesStore\\ShoesStore.csproj": {
+    "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
+        "projectUniqueName": "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
         "projectName": "ShoesStore",
-        "projectPath": "C:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
+        "projectPath": "c:\\ShoesStore\\ShoesStore\\ShoesStore.csproj",
         "packagesPath": "C:\\Users\\KwameProject\\.nuget\\packages\\",
-        "outputPath": "C:\\ShoesStore\\ShoesStore\\obj\\",
+        "outputPath": "c:\\ShoesStore\\ShoesStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

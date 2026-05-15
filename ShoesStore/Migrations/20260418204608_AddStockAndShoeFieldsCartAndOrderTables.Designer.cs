@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoesStore.Data;
 
@@ -11,9 +12,11 @@ using ShoesStore.Data;
 namespace ShoesStore.Migrations
 {
     [DbContext(typeof(ShoesDbContext))]
-    partial class ShoesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260418204608_AddStockAndShoeFieldsCartAndOrderTables")]
+    partial class AddStockAndShoeFieldsCartAndOrderTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,8 +25,6 @@ namespace ShoesStore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("ShoesStore.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -70,7 +71,6 @@ namespace ShoesStore.Migrations
                     b.ToTable("CartItems");
                 });
 
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
             modelBuilder.Entity("ShoesStore.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -79,21 +79,6 @@ namespace ShoesStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-=======
                     b.Property<string>("CustomerEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -113,7 +98,6 @@ namespace ShoesStore.Migrations
 
                     b.HasKey("Id");
 
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
                     b.ToTable("Orders");
                 });
 
@@ -198,11 +182,7 @@ namespace ShoesStore.Migrations
                             IsBestSeller = true,
                             Name = "Air Runner",
                             Price = 1299.99m,
-<<<<<<< HEAD
-                            StockQuantity = 5
-=======
                             StockQuantity = 50
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
                         },
                         new
                         {
@@ -214,49 +194,6 @@ namespace ShoesStore.Migrations
                             IsBestSeller = false,
                             Name = "Classic Court",
                             Price = 999.99m,
-<<<<<<< HEAD
-                            StockQuantity = 10
-                        });
-                });
-
-            modelBuilder.Entity("ShoesStore.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ShoesStore.Models.Order", b =>
-                {
-                    b.HasOne("ShoesStore.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-=======
                             StockQuantity = 30
                         });
                 });
@@ -278,7 +215,6 @@ namespace ShoesStore.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Shoe");
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
                 });
 
             modelBuilder.Entity("ShoesStore.Models.OrderItem", b =>
@@ -292,11 +228,7 @@ namespace ShoesStore.Migrations
                     b.HasOne("ShoesStore.Models.Shoe", "Shoe")
                         .WithMany()
                         .HasForeignKey("ShoeId")
-<<<<<<< HEAD
-                        .OnDelete(DeleteBehavior.Cascade)
-=======
                         .OnDelete(DeleteBehavior.Restrict)
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -304,14 +236,11 @@ namespace ShoesStore.Migrations
                     b.Navigation("Shoe");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("ShoesStore.Models.Cart", b =>
                 {
                     b.Navigation("Items");
                 });
 
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
             modelBuilder.Entity("ShoesStore.Models.Order", b =>
                 {
                     b.Navigation("Items");
