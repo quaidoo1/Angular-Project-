@@ -21,9 +21,6 @@ namespace ShoesStore.Models
         public decimal Price { get; set; }
 
         public string Brand { get; set; } = string.Empty;
-<<<<<<< HEAD
-        public int StockQuantity { get; set; } = 10;
-=======
 
         public string Category { get; set; } = string.Empty;
 
@@ -35,10 +32,8 @@ namespace ShoesStore.Models
 
         [Range(0, int.MaxValue)]
 
-        public int StockQuantity { get; set; } = 0;
+        public int StockQuantity { get; set; } = 10;
 
->>>>>>> 012182f271a5d108f50fd57eeea7aca50aec6abf
     }
 
 }
- 
