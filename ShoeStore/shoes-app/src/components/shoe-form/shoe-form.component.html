@@ -36,6 +36,18 @@
       </div>
 
       <div class="form-group">
+        <label class="label" for="stock">Stock Quantity</label>
+        <input
+          id="stock"
+          class="input"
+          type="number"
+          [(ngModel)]="shoe.stockQuantity"
+          placeholder="0"
+          min="0"
+        />
+      </div>
+
+      <div class="form-group">
         <label class="label" for="price">Price ($)</label>
         <input
           id="price"

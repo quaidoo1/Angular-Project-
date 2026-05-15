@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject, ChangeDetectorRef } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShoeService } from '../../services/shoe.services';
@@ -16,20 +17,38 @@ export class ShoeDeleteComponent implements OnInit {
   loading = true;
   deleting = false;
   error = '';
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   constructor(
     private shoeService: ShoeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.shoeService.getById(+id).subscribe({
-        next: (data) => { this.shoe = data; this.loading = false; },
-        error: () => { this.error = 'Shoe not found.'; this.loading = false; }
-      });
+      if (this.isBrowser) {
+        this.shoeService.getById(+id).subscribe({
+          next: (data) => { 
+            this.shoe = data; 
+            this.loading = false; 
+            this.cdr.detectChanges();
+          },
+          error: () => { 
+            this.error = 'Shoe not found.'; 
+            this.loading = false; 
+            this.cdr.detectChanges();
+          }
+        });
+      } else {
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
+    } else {
+      this.loading = false;
+      this.cdr.detectChanges();
     }
   }
 
@@ -38,7 +57,11 @@ export class ShoeDeleteComponent implements OnInit {
     this.deleting = true;
     this.shoeService.delete(this.shoe.id).subscribe({
       next: () => this.router.navigate(['/']),
-      error: () => { this.error = 'Failed to delete shoe.'; this.deleting = false; }
+      error: () => { 
+        this.error = 'Failed to delete shoe.'; 
+        this.deleting = false; 
+        this.cdr.detectChanges();
+      }
     });
   }
 

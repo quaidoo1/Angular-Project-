@@ -2,11 +2,16 @@ import { Routes } from '@angular/router';
 import { ShoeListComponent } from '../components/shoe-list/shoe-list.component';
 import { ShoeFormComponent } from '../components/shoe-form/shoe-form.component';
 import { ShoeDeleteComponent } from '../components/shoe-delete/shoe-delete.component';
+import { LoginComponent } from '../components/login/login.component';
+import { SignupComponent } from '../components/signup/signup.component';
+import { authGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: ShoeListComponent },
-  { path: 'add', component: ShoeFormComponent },
-  { path: 'edit/:id', component: ShoeFormComponent },
-  { path: 'delete/:id', component: ShoeDeleteComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: '', component: ShoeListComponent, canActivate: [authGuard] },
+  { path: 'add', component: ShoeFormComponent, canActivate: [authGuard] },
+  { path: 'edit/:id', component: ShoeFormComponent, canActivate: [authGuard] },
+  { path: 'delete/:id', component: ShoeDeleteComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

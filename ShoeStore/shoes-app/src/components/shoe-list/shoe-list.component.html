@@ -5,11 +5,49 @@
         <h1 class="page-title">Shoes</h1>
         <p class="page-subtitle">{{ shoes.length }} items in store</p>
       </div>
-      <button class="btn btn-primary" (click)="addShoe()">+ Add Shoe</button>
+      <div class="header-actions">
+        <span class="user-badge" *ngIf="currentUser">👋 {{ currentUser.username }}</span>
+        
+        <div class="cart-container">
+          <button class="btn btn-primary" (click)="toggleCart()">
+            🛒 Cart <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+          </button>
+          
+          <div class="cart-dropdown" *ngIf="isCartOpen">
+            <h3>Your Cart</h3>
+            <div *ngIf="cartCount === 0" class="empty-cart">Cart is empty.</div>
+            <div *ngIf="cartCount > 0">
+              <div class="cart-item" *ngFor="let item of (cartItems$ | async)">
+                <div class="cart-item-info">
+                  <strong>{{ item.shoe.name }}</strong>
+                  <span>${{ item.shoe.price | number:'1.2-2' }}</span>
+                </div>
+                <div class="cart-item-actions">
+                  <input type="number" [value]="item.quantity" min="0" [max]="item.shoe.stockQuantity" (change)="updateCartQuantity(item.shoe.id, $event)">
+                  <button class="btn-remove" (click)="removeFromCart(item.shoe.id)">✕</button>
+                </div>
+              </div>
+              <div class="cart-total">
+                <strong>Total:</strong> ${{ cartTotal | number:'1.2-2' }}
+              </div>
+              <button class="btn btn-checkout" [disabled]="isCheckingOut" (click)="checkoutCart()">
+                {{ isCheckingOut ? 'Processing...' : 'Checkout & Purchase' }}
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" (click)="addShoe()">+ Add Shoe</button>
+        <button class="btn btn-logout" (click)="logout()">Sign out</button>
+      </div>
     </div>
   </header>
 
   <div class="content">
+    <div *ngIf="purchaseMessage" class="alert-box" [ngClass]="{'alert-error': purchaseMessage.startsWith('Error'), 'alert-success': purchaseMessage.startsWith('Success')}">
+      {{ purchaseMessage }}
+    </div>
+
     <div *ngIf="loading" class="state-msg">Loading...</div>
     <div *ngIf="error" class="state-msg error">{{ error }}</div>
 
@@ -21,6 +59,7 @@
             <th>Name</th>
             <th>Brand</th>
             <th>Price</th>
+            <th>Stock</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -29,8 +68,18 @@
             <td class="id-cell">{{ shoe.id }}</td>
             <td class="name-cell">{{ shoe.name }}</td>
             <td>{{ shoe.brand }}</td>
-            <td class="price-cell">\${{ shoe.price | number:'1.2-2' }}</td>
+            <td class="price-cell">${{ shoe.price | number:'1.2-2' }}</td>
+            <td class="stock-cell">
+              <span [ngClass]="{'out-of-stock': shoe.stockQuantity === 0}">
+                {{ shoe.stockQuantity > 0 ? shoe.stockQuantity + ' in stock' : 'Out of Stock' }}
+              </span>
+            </td>
             <td class="actions-cell">
+              <button class="btn btn-sm btn-purchase" 
+                      *ngIf="shoe.stockQuantity > 0"
+                      (click)="addToCart(shoe)">
+                      Add to Cart
+              </button>
               <button class="btn btn-sm btn-edit" (click)="editShoe(shoe.id)">Edit</button>
               <button class="btn btn-sm btn-delete" (click)="deleteShoe(shoe.id)">Delete</button>
             </td>
