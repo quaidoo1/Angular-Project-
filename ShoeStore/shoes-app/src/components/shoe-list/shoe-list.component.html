@@ -6,11 +6,10 @@
         <p class="page-subtitle">{{ shoes.length }} items in store</p>
       </div>
       <div class="header-actions">
-        <span class="user-badge" *ngIf="currentUser">👋 {{ currentUser.username }}</span>
         
         <div class="cart-container">
           <button class="btn btn-primary" (click)="toggleCart()">
-            🛒 Cart <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+            Cart <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
           </button>
           
           <div class="cart-dropdown" *ngIf="isCartOpen">
@@ -37,7 +36,7 @@
           </div>
         </div>
         
-        <button class="btn btn-primary" (click)="addShoe()">+ Add Shoe</button>
+        <button class="btn btn-logout" (click)="navigateToManage()">Manage Inventory</button>
         <button class="btn btn-logout" (click)="logout()">Sign out</button>
       </div>
     </div>
@@ -80,8 +79,7 @@
                       (click)="addToCart(shoe)">
                       Add to Cart
               </button>
-              <button class="btn btn-sm btn-edit" (click)="editShoe(shoe.id)">Edit</button>
-              <button class="btn btn-sm btn-delete" (click)="deleteShoe(shoe.id)">Delete</button>
+              <span *ngIf="shoe.stockQuantity === 0" class="out-of-stock">Sold Out</span>
             </td>
           </tr>
         </tbody>

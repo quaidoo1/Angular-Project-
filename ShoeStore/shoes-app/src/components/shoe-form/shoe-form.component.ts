@@ -56,7 +56,7 @@ export class ShoeFormComponent implements OnInit {
 
     if (this.isEdit) {
       this.shoeService.update(this.shoe.id, this.shoe).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/manage']),
         error: () => { 
           this.error = 'Failed to update shoe.'; 
           this.saving = false; 
@@ -66,7 +66,7 @@ export class ShoeFormComponent implements OnInit {
     } else {
       const { id, ...newShoe } = this.shoe;
       this.shoeService.create(newShoe).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/manage']),
         error: () => { 
           this.error = 'Failed to create shoe.'; 
           this.saving = false; 
@@ -77,6 +77,6 @@ export class ShoeFormComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/manage']);
   }
 }

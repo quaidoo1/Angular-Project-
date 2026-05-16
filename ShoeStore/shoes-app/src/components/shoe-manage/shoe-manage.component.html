@@ -1,0 +1,52 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-inner">
+      <div>
+        <h1 class="page-title">Manage Inventory</h1>
+        <p class="page-subtitle">{{ shoes.length }} items in system</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-logout" (click)="backToStore()">← Back to Store</button>
+        <button class="btn btn-primary" (click)="addShoe()">+ Add New Shoe</button>
+        <button class="btn btn-logout" (click)="logout()">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div *ngIf="loading" class="state-msg">Loading...</div>
+    <div *ngIf="error" class="state-msg error">{{ error }}</div>
+
+    <div *ngIf="!loading && !error" class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shoe of shoes">
+            <td class="id-cell">{{ shoe.id }}</td>
+            <td class="name-cell">{{ shoe.name }}</td>
+            <td>{{ shoe.brand }}</td>
+            <td class="price-cell">${{ shoe.price | number:'1.2-2' }}</td>
+            <td class="stock-cell">
+              <span [ngClass]="{'out-of-stock': shoe.stockQuantity === 0}">
+                {{ shoe.stockQuantity > 0 ? shoe.stockQuantity : 'Out of Stock' }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <button class="btn btn-sm btn-edit" (click)="editShoe(shoe.id)">Edit</button>
+              <button class="btn btn-sm btn-delete" (click)="deleteShoe(shoe.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

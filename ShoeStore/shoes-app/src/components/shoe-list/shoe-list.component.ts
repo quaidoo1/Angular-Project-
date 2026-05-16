@@ -90,16 +90,8 @@ export class ShoeListComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  editShoe(id: number): void {
-    this.router.navigate(['/edit', id]);
-  }
-
-  deleteShoe(id: number): void {
-    this.router.navigate(['/delete', id]);
-  }
-
-  addShoe(): void {
-    this.router.navigate(['/add']);
+  navigateToManage(): void {
+    this.router.navigate(['/manage']);
   }
 
   checkoutCart(): void {
@@ -117,7 +109,7 @@ export class ShoeListComponent implements OnInit {
       next: (res) => {
         this.purchaseMessage = `Success: ${res.message} (Total: $${res.totalAmount})`;
         
-        // Decrease stock locally to reflect state immediately without reloading
+        // Decrease stock locally ONLY after successful checkout
         for (const item of this.cartService.currentCart) {
           const s = this.shoes.find(shoe => shoe.id === item.shoe.id);
           if (s) s.stockQuantity -= item.quantity;

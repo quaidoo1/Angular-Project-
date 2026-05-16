@@ -66,6 +66,6 @@ export class ShoeDeleteComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/manage']);
   }
 }
