@@ -4,4 +4,5 @@ export interface Shoe {
   price: number;
   brand: string;
   stockQuantity: number;
+  isSoldOut?: boolean;
 }

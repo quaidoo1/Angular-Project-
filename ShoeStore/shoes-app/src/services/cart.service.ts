@@ -24,13 +24,9 @@ export class CartService {
     const existing = items.find(i => i.shoe.id === shoe.id);
     
     if (existing) {
-      if (existing.quantity < shoe.stockQuantity) {
-        existing.quantity++;
-      }
+      existing.quantity++;
     } else {
-      if (shoe.stockQuantity > 0) {
-        items.push({ shoe, quantity: 1 });
-      }
+      items.push({ shoe, quantity: 1 });
     }
     this.cartItems.next(items);
   }
@@ -48,9 +44,7 @@ export class CartService {
         this.removeFromCart(shoeId);
         return;
       }
-      if (quantity <= item.shoe.stockQuantity) {
-        item.quantity = quantity;
-      }
+      item.quantity = quantity;
     }
     this.cartItems.next(items);
   }

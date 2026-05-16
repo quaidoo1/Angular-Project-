@@ -45,7 +45,16 @@ export class ShoeListComponent implements OnInit {
     this.loading = true;
     this.shoeService.getAll().subscribe({
       next: (data) => { 
-        this.shoes = data; 
+        // Initial state from server: if stock is 0 on server, it's truly sold out
+        this.shoes = data.map(s => ({ ...s, isSoldOut: s.stockQuantity === 0 })); 
+
+        // Sync local stock with cart: this reduces the NUMBER but should NOT set isSoldOut to true
+        this.cartService.currentCart.forEach(item => {
+          const s = this.shoes.find(shoe => shoe.id === item.shoe.id);
+          if (s) {
+            s.stockQuantity -= item.quantity;
+          }
+        });
         this.loading = false; 
         this.cdr.detectChanges();
       },
@@ -75,18 +84,36 @@ export class ShoeListComponent implements OnInit {
   }
 
   addToCart(shoe: Shoe): void {
-    this.cartService.addToCart(shoe);
-    this.cdr.detectChanges();
+    if (shoe.stockQuantity > 0) {
+      this.cartService.addToCart(shoe);
+      shoe.stockQuantity--;
+      this.cdr.detectChanges();
+    }
   }
   
   updateCartQuantity(shoeId: number, event: Event): void {
-    const qty = parseInt((event.target as HTMLInputElement).value, 10);
-    this.cartService.updateQuantity(shoeId, qty);
+    const newQty = parseInt((event.target as HTMLInputElement).value, 10);
+    const item = this.cartService.currentCart.find(i => i.shoe.id === shoeId);
+    if (item) {
+      const diff = newQty - item.quantity;
+      const shoe = this.shoes.find(s => s.id === shoeId);
+      if (shoe && (diff <= 0 || shoe.stockQuantity >= diff)) {
+        this.cartService.updateQuantity(shoeId, newQty);
+        shoe.stockQuantity -= diff;
+      }
+    }
     this.cdr.detectChanges();
   }
   
   removeFromCart(shoeId: number): void {
-    this.cartService.removeFromCart(shoeId);
+    const item = this.cartService.currentCart.find(i => i.shoe.id === shoeId);
+    if (item) {
+      const shoe = this.shoes.find(s => s.id === shoeId);
+      if (shoe) {
+        shoe.stockQuantity += item.quantity;
+      }
+      this.cartService.removeFromCart(shoeId);
+    }
     this.cdr.detectChanges();
   }
 
@@ -109,12 +136,12 @@ export class ShoeListComponent implements OnInit {
       next: (res) => {
         this.purchaseMessage = `Success: ${res.message} (Total: $${res.totalAmount})`;
         
-        // Decrease stock locally ONLY after successful checkout
+        // Mark as sold out only after checkout
         for (const item of this.cartService.currentCart) {
           const s = this.shoes.find(shoe => shoe.id === item.shoe.id);
-          if (s) s.stockQuantity -= item.quantity;
+          if (s && s.stockQuantity === 0) s.isSoldOut = true;
         }
-        
+
         this.cartService.clearCart();
         this.isCheckingOut = false;
         this.isCartOpen = false;

@@ -22,7 +22,7 @@
                   <span>${{ item.shoe.price | number:'1.2-2' }}</span>
                 </div>
                 <div class="cart-item-actions">
-                  <input type="number" [value]="item.quantity" min="0" [max]="item.shoe.stockQuantity" (change)="updateCartQuantity(item.shoe.id, $event)">
+                  <input type="number" [value]="item.quantity" min="0" [max]="item.shoe.stockQuantity + item.quantity" (change)="updateCartQuantity(item.shoe.id, $event)">
                   <button class="btn-remove" (click)="removeFromCart(item.shoe.id)">✕</button>
                 </div>
               </div>
@@ -69,17 +69,18 @@
             <td>{{ shoe.brand }}</td>
             <td class="price-cell">${{ shoe.price | number:'1.2-2' }}</td>
             <td class="stock-cell">
-              <span [ngClass]="{'out-of-stock': shoe.stockQuantity === 0}">
-                {{ shoe.stockQuantity > 0 ? shoe.stockQuantity + ' in stock' : 'Out of Stock' }}
+              <span [ngClass]="{'out-of-stock': shoe.isSoldOut}">
+                <ng-container *ngIf="shoe.isSoldOut">Out of Stock</ng-container>
+                <ng-container *ngIf="!shoe.isSoldOut">{{ shoe.stockQuantity }} in stock</ng-container>
               </span>
             </td>
             <td class="actions-cell">
               <button class="btn btn-sm btn-purchase" 
-                      *ngIf="shoe.stockQuantity > 0"
+                      *ngIf="!shoe.isSoldOut"
                       (click)="addToCart(shoe)">
                       Add to Cart
               </button>
-              <span *ngIf="shoe.stockQuantity === 0" class="out-of-stock">Sold Out</span>
+              <span *ngIf="shoe.isSoldOut" class="out-of-stock">Sold Out</span>
             </td>
           </tr>
         </tbody>
